@@ -1,0 +1,85 @@
+﻿SOA - Service Oriented Architecture
+Web Service - http, https, tcp(internet, intranet) - XML (SOAP)
+Web API - Http, https - XML, JSON - IoT, OS's, Cross Platform
+	-RESTFul API - REpresentational State Transfer - Architectural Pattern
+	Stateless Protocol - Fire and Forget
+
+XML - XSD(Schema Definition)
+<WeatherData>
+	<tempature>
+		29 
+	</tempature>
+</WeatherData>
+
+JSON
+
+{
+"tempature" : "29"
+}
+
+Default Data Format - Web API using ASP.NET Core - JSON
+
+Scaffold-DbContext -Connection "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=QuickKartDB;Integrated Security=True;" -Provider Microsoft.EntityFrameworkCore.SqlServer -o Models -t Products, Categories
+
+Configuration - 
+XML - .NET Framework
+JSON .NET Core
+
+Install-Package Microsoft.Extensions.Configuration -version 3.1.28
+
+Install-Package Microsoft.Extensions.Configuration.FileExtensions -version 3.1.28
+
+Install-Package Microsoft.Extensions.Configuration.Json -version 3.1.28
+
+--
+Controller - Access Data and Convert or Display in the proper ways (HTTP Status Code)
+404 - NotFound
+403 - Forbidden
+500 - Internal Server Error
+200 - OK
+201 - Created
+204 - NoContent (Update)
+
+Routing
+Used to Create and redirect
+
+Class Controller
+In Web API methods are called as "action"
+AddProduct()
+DeleteProduct()
+
+https://localhost:44372/api/Products/GetProductByProductId?productId=P101
+https://localhost:44372/api/Products/GetAllProducts
+
+SSL - Secured Socket Layer
+
+anything after ? in URL is called as Query String
+
+https://localhost:44372/weatherforecast
+
+www.google.com
+
+
+
+ControllerBase - Return HTTP Status Code
+
+Controller - Return View(HTML)
+
+MVC
+HTML (View ())
+String (Content())
+JSON (json())
+RedirectToAction()
+
+
+Http Verbs - Attribute [] - Compiler Instruction
+HttpGet  - Select-   request send from browser to server, in response we get relevant data
+HttpPost - Insert -  request server to store some data in database or server to process 
+HttpPut - Update - request server to modify existing data in database or server to process
+HttpDelete - Delete - request server to delete/remove data in database or server to process
+
+
+
+
+
+

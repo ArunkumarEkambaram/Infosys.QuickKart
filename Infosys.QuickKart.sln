@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infosys.QuickKart.DataAccessLayer", "Infosys.QuickKart.DataAccessLayer\Infosys.QuickKart.DataAccessLayer.csproj", "{016DA453-E162-4422-9883-095536B6B6BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infosys.QuickKart.ServiceLayer", "Infosys.QuickKart.ServiceLayer\Infosys.QuickKart.ServiceLayer.csproj", "{883C293F-112A-45D1-8959-5304AFCA2C96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{016DA453-E162-4422-9883-095536B6B6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016DA453-E162-4422-9883-095536B6B6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016DA453-E162-4422-9883-095536B6B6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883C293F-112A-45D1-8959-5304AFCA2C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883C293F-112A-45D1-8959-5304AFCA2C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883C293F-112A-45D1-8959-5304AFCA2C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883C293F-112A-45D1-8959-5304AFCA2C96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
