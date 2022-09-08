@@ -39,6 +39,7 @@ namespace Infosys.QuickKart.ServiceLayer.Controllers
         //Retrieve All the Products
         [HttpGet]
         [Route("GetProducts")]
+        //api/Products/getproducts
         public IActionResult GetAllProducts()
         {
             List<Products> products;
@@ -55,6 +56,7 @@ namespace Infosys.QuickKart.ServiceLayer.Controllers
 
         [HttpGet]
         [Route("GetProductById/{productId}")]
+        /* /api/Products/GetProductById/p101 */
         public IActionResult GetProductByProductId(string productId)
         {
             Products product;
