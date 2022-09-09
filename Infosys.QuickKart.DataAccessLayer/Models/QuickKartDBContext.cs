@@ -24,6 +24,12 @@ namespace Infosys.QuickKart.DataAccessLayer.Models
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Products> Products { get; set; }
 
+        //Below function used to call UDF - Scalar Function
+        public static string ufn_GenerateNewProductId()
+        {
+            return null;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
@@ -38,6 +44,11 @@ namespace Infosys.QuickKart.DataAccessLayer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Mapping SQL Scalar Funtion to Static Method ufn_GenerateNewProductId
+            modelBuilder.HasDefaultSchema("dbo")
+                        .HasDbFunction(() => QuickKartDBContext.ufn_GenerateNewProductId())
+                        .HasName("ufn_GenerateNewProductId");
+
             modelBuilder.Entity<Categories>(entity =>
             {
                 entity.HasKey(e => e.CategoryId)

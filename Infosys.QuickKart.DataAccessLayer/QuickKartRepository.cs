@@ -1,4 +1,6 @@
 ﻿using Infosys.QuickKart.DataAccessLayer.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +37,16 @@ namespace Infosys.QuickKart.DataAccessLayer
             return _dbContext.Products.Find(productId);
         }
 
+        //Invoking Scalar Function
+        private string GetNewProductId()
+        {
+            return _dbContext.Products.Select(p => QuickKartDBContext.ufn_GenerateNewProductId()).FirstOrDefault();
+        }
+
         //Add New Product - Model
         public bool AddNewProduct(Products product)
         {
+            product.ProductId = GetNewProductId();
             _dbContext.Products.Add(product);
             int res = _dbContext.SaveChanges(); //Returns no of rows affected
             if (res > 0)
@@ -45,6 +54,27 @@ namespace Infosys.QuickKart.DataAccessLayer
                 return true;
             }
             return false;
+        }
+
+        //Add New Product using USP
+        public int AddNewProductUsingUSP(string productName, decimal price, int quantity, byte categoryId)
+        {           
+            SqlParameter PrmProductId = new SqlParameter("@ProductId", GetNewProductId());
+            SqlParameter PrmProductName = new SqlParameter("@ProductName", productName);
+            SqlParameter PrmPrice = new SqlParameter("@Price", price);
+            SqlParameter PrmQuantity = new SqlParameter("@QuantityAvailable", quantity);
+            SqlParameter PrmCategoryId = new SqlParameter("@CategoryId", categoryId);
+            SqlParameter PrmReturnValue = new SqlParameter("@ReturnValue", System.Data.SqlDbType.Int)
+            {
+                Direction = System.Data.ParameterDirection.Output
+            };
+
+            _dbContext.Database.ExecuteSqlRaw("EXEC @ReturnValue = usp_AddProduct @ProductId, @ProductName, @CategoryId, @Price, @QuantityAvailable"
+            , PrmProductId, PrmProductName, PrmCategoryId, PrmPrice, PrmQuantity, PrmReturnValue);
+
+            int result = Convert.ToInt32(PrmReturnValue.Value);
+
+            return result;
         }
 
         //Update Product
