@@ -77,6 +77,19 @@ namespace Infosys.QuickKart.DataAccessLayer
             return result;
         }
 
+        //Add new Categories
+        public bool AddCategory(string categoryName)
+        {
+            _dbContext.Categories.Add(new Categories { CategoryName = categoryName });
+           var result= _dbContext.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
         //Update Product
         public bool UpdateProduct(string productId, decimal price, int quantity)
         {
@@ -85,6 +98,34 @@ namespace Infosys.QuickKart.DataAccessLayer
             {
                 productInDb.Price = price;
                 productInDb.QuantityAvailable = quantity;
+                _dbContext.Products.Update(productInDb);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        //Update Product using Model
+        public bool UpdateProductUsingModel(Products product)
+        {
+            var productInDb = _dbContext.Products.Find(product.ProductId);
+            if (productInDb != null)
+            {
+                productInDb.Price = product.Price;
+                //productInDb.QuantityAvailable = product.QuantityAvailable;
+                _dbContext.Products.Update(productInDb);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+       
+        public bool UpdateProductPrice(Products product)
+        {
+            var productInDb = _dbContext.Products.Find(product.ProductId);
+            if (productInDb != null)
+            {
+                productInDb.Price = product.Price;                
                 _dbContext.Products.Update(productInDb);
                 _dbContext.SaveChanges();
                 return true;
