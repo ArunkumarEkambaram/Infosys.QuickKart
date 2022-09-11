@@ -58,7 +58,7 @@ namespace Infosys.QuickKart.DataAccessLayer
 
         //Add New Product using USP
         public int AddNewProductUsingUSP(string productName, decimal price, int quantity, byte categoryId)
-        {           
+        {
             SqlParameter PrmProductId = new SqlParameter("@ProductId", GetNewProductId());
             SqlParameter PrmProductName = new SqlParameter("@ProductName", productName);
             SqlParameter PrmPrice = new SqlParameter("@Price", price);
@@ -81,7 +81,7 @@ namespace Infosys.QuickKart.DataAccessLayer
         public bool AddCategory(string categoryName)
         {
             _dbContext.Categories.Add(new Categories { CategoryName = categoryName });
-           var result= _dbContext.SaveChanges();
+            var result = _dbContext.SaveChanges();
             if (result > 0)
             {
                 return true;
@@ -119,13 +119,13 @@ namespace Infosys.QuickKart.DataAccessLayer
             }
             return false;
         }
-       
+
         public bool UpdateProductPrice(Products product)
         {
             var productInDb = _dbContext.Products.Find(product.ProductId);
             if (productInDb != null)
             {
-                productInDb.Price = product.Price;                
+                productInDb.Price = product.Price;
                 _dbContext.Products.Update(productInDb);
                 _dbContext.SaveChanges();
                 return true;
@@ -143,6 +143,13 @@ namespace Infosys.QuickKart.DataAccessLayer
                 return true;
             }
             return false;
+        }
+
+        //Implementing UDF
+        public IEnumerable<Products> GetAllProductsUsingFromSQLRaw(string categoryId)
+        {          
+            var products = _dbContext.Products.FromSqlRaw("Select * from Products Where CategoryId=" + categoryId);
+            return products;
         }
 
     }

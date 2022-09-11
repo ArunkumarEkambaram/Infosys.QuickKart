@@ -1,5 +1,6 @@
 ﻿using Infosys.QuickKart.DataAccessLayer;
 using Infosys.QuickKart.DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 namespace Infosys.QuickKart.ServiceLayer.Controllers
-{
+{    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -55,6 +56,13 @@ namespace Infosys.QuickKart.ServiceLayer.Controllers
                 throw ex;
             }
             return Ok(products); //Retunrs HTTP Status Code : 200
+        }
+
+        [HttpGet("GetProductsByCategoryId/{categoryId}")]
+        [ProducesResponseType(typeof(Products), StatusCodes.Status200OK)]
+        public IEnumerable<Products> GetProductsByCategoryId(string categoryId)
+        {
+            return repository.GetAllProductsUsingFromSQLRaw(categoryId);
         }
 
         [HttpGet]
