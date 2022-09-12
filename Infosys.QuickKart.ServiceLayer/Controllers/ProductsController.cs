@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Infosys.QuickKart.ServiceLayer.Controllers
 {    
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
