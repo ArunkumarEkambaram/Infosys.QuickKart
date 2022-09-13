@@ -10,8 +10,8 @@ using System.Net;
 using System.Threading.Tasks;
 
 namespace Infosys.QuickKart.ServiceLayer.Controllers
-{    
-    [Authorize]
+{
+    // [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -42,6 +42,7 @@ namespace Infosys.QuickKart.ServiceLayer.Controllers
 
         //Microsoft recommended code
         //Retrieve All the Products
+       // [Authorize]
         [HttpGet]
         [Route("GetProducts")]
         //api/Products/getproducts
@@ -65,6 +66,7 @@ namespace Infosys.QuickKart.ServiceLayer.Controllers
         {
             return repository.GetAllProductsUsingFromSQLRaw(categoryId);
         }
+
 
         [HttpGet]
         [Route("GetProductById/{productId}", Name = "GetProductById")]
@@ -107,6 +109,7 @@ namespace Infosys.QuickKart.ServiceLayer.Controllers
         #endregion
 
         //Add New Product using Model
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("AddProduct")]
         public IActionResult AddNewProduct([FromBody] Products product)

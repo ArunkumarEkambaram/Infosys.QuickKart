@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infosys.QuickKart.DataAcces
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infosys.QuickKart.ServiceLayer", "Infosys.QuickKart.ServiceLayer\Infosys.QuickKart.ServiceLayer.csproj", "{883C293F-112A-45D1-8959-5304AFCA2C96}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infosys.EncryptDecrypt", "C:\Users\Admin\Downloads\enterprise-app\Infosys.EncryptDecrypt\Infosys.EncryptDecrypt.csproj", "{316E02A3-C8C8-42F0-BBAB-9F3F9B6A6B4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{6C824C9F-EAC6-4888-9C73-293A00334C8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{883C293F-112A-45D1-8959-5304AFCA2C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{883C293F-112A-45D1-8959-5304AFCA2C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{883C293F-112A-45D1-8959-5304AFCA2C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316E02A3-C8C8-42F0-BBAB-9F3F9B6A6B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316E02A3-C8C8-42F0-BBAB-9F3F9B6A6B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316E02A3-C8C8-42F0-BBAB-9F3F9B6A6B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316E02A3-C8C8-42F0-BBAB-9F3F9B6A6B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C824C9F-EAC6-4888-9C73-293A00334C8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C824C9F-EAC6-4888-9C73-293A00334C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C824C9F-EAC6-4888-9C73-293A00334C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C824C9F-EAC6-4888-9C73-293A00334C8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

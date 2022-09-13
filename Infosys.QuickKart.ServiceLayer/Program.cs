@@ -18,10 +18,19 @@ namespace Infosys.QuickKart.ServiceLayer
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args)                
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();                                   
+                    webBuilder.UseStartup<Startup>()
+                    //.UseKestrel
+                    .ConfigureKestrel(x =>
+                    {
+                        x.Listen(IPAddress.Loopback, 443, listenOption =>
+                          {
+                              listenOption.UseHttps();
+                          });
+                    });
+                    
                 });
     }
 }

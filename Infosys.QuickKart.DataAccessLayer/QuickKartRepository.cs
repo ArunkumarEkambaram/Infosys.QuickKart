@@ -37,7 +37,7 @@ namespace Infosys.QuickKart.DataAccessLayer
             return _dbContext.Products.Find(productId);
         }
 
-        //Invoking Scalar Function
+        //Invoking Scalar Function - Step 3
         private string GetNewProductId()
         {
             return _dbContext.Products.Select(p => QuickKartDBContext.ufn_GenerateNewProductId()).FirstOrDefault();
@@ -147,8 +147,9 @@ namespace Infosys.QuickKart.DataAccessLayer
 
         //Implementing UDF
         public IEnumerable<Products> GetAllProductsUsingFromSQLRaw(string categoryId)
-        {          
-            var products = _dbContext.Products.FromSqlRaw("Select * from Products Where CategoryId=" + categoryId);
+        {
+            SqlParameter PrmCategoryId = new SqlParameter("@CategoryId", categoryId);
+            var products = _dbContext.Products.FromSqlRaw("Select * from Products Where CategoryId=@CategoryId", PrmCategoryId);
             return products;
         }
 

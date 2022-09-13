@@ -58,7 +58,14 @@ namespace Infosys.QuickKart.ServiceLayer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors(a =>
+            {
+                a.AllowAnyOrigin() //Any Target Application
+                 .AllowAnyHeader() //Json / XML
+                 .AllowAnyMethod(); //GET, PUT, POST, Delete
+            });
+
+            app.UseHttpsRedirection();//Configuring SSL (IIS)
 
             app.UseRouting();
           

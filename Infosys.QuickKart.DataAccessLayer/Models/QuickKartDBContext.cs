@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Infosys.EncryptDecrypt;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -24,7 +25,7 @@ namespace Infosys.QuickKart.DataAccessLayer.Models
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Products> Products { get; set; }
 
-        //Below function used to call UDF - Scalar Function
+        //Below function used to call UDF - Scalar Function - Step 1
         public static string ufn_GenerateNewProductId()
         {
             return null;
@@ -34,20 +35,28 @@ namespace Infosys.QuickKart.DataAccessLayer.Models
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
             var config = builder.Build();//Configure the above changes
-            var connectionString = config.GetConnectionString("QuickKartConStr");            
+            var connectionString = config.GetConnectionString("QuickKartConStr");
+
+            var dataSource = config.GetValue<string>("ConnectionParameters:DataSource");
+            var database = config.GetValue<string>("ConnectionParameters:Database");
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(connectionString);
+                //Decrypt Data Source
+                var ds = Repository.Decrypt(dataSource, "ServerKey");
+                //Decrypt Database
+                var db = Repository.Decrypt(database, "DatabaseKey");
+
+                optionsBuilder.UseSqlServer(string.Format(connectionString, ds, db));
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Mapping SQL Scalar Funtion to Static Method ufn_GenerateNewProductId
+            //Mapping SQL Scalar Funtion to Static Method ufn_GenerateNewProductId - Step 2
             modelBuilder.HasDefaultSchema("dbo")
-                        .HasDbFunction(() => QuickKartDBContext.ufn_GenerateNewProductId())
-                        .HasName("ufn_GenerateNewProductId");
+                        .HasDbFunction(() => QuickKartDBContext.ufn_GenerateNewProductId()) //Static Function created in the similar UDF Name
+                        .HasName("ufn_GenerateNewProductId");//SQL Server UDF -Scalar Function
 
             modelBuilder.Entity<Categories>(entity =>
             {
